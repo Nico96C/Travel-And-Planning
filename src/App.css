@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Roboto, sans-serif;
+  box-sizing: border-box;
+}
+
+.Main-Container {
+  padding: 0 25%;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Banner-Container {
+  width: 100%;
+  height: auto;
+  background-color: var(--color-main);
+  position: relative;
+}
+
+.Banner-Primary {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.Body-Container {
+  width: 100%;
+  height: 425px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Banner-Button {
+  position: absolute;
+  font-family: "Exo", sans-serif;
+  top: 72%;
+  left: 18%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  width: 100px;
+  background-color: var(--color-secondary);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+.Banner-Button:hover {
+  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.5);
+}
+
+.NavContainer {
+  position: sticky;
+  top: -1px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--color-secondary);
+  margin-bottom: 5px;
+  z-index: 99;
+  background-color: var(--color-main);
+}
+
+button {
+  background-color: var(--color-secondary);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+button:hover {
+  background: var(--color-tertiary);
+}
+
+.Logo {
+  font-size: 20px;
+}
+
+.Logo h4 {
+  font-family: "Exo", sans-serif;
+}
+
+.Buttons {
+  display: flex;
+  align-items: center;
+}

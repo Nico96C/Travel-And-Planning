@@ -1,0 +1,25 @@
+:root {
+  --color-main: #fff1eb;
+  --color-secondary: #945135;
+  --color-tertiary: #70422f;
+  font-family: sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: var(--color-secondary);
+  background-color: var(--color-main);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
