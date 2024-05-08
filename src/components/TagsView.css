@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap");
+
+.add-item {
+  width: 100%;
+  height: auto;
+  border: 3px var(--color-secondary);
+  border-style: dashed;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  margin-bottom: 50px;
+  font-family: "Exo", sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--color-secondary);
+}
+
+.order-item {
+  display: flex;
+  width: 100%;
+  height: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+}
+
+.Main-Container p {
+  font-family: "Exo", sans-serif;
+  font-size: 19px;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.Main-Container h2 {
+  font-family: "Exo", sans-serif;
+  font-size: 32px;
+}
+
+.Banner-Secondary {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 1352/267;
+}

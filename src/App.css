@@ -24,10 +24,18 @@
   position: relative;
 }
 
-.Banner-Primary {
+.Banner-Primary-1 {
   width: 100%;
   height: auto;
   object-fit: cover;
+  aspect-ratio: 676/225;
+}
+
+.Banner-Primary-2 {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 675/121;
 }
 
 .Body-Container {
@@ -98,4 +106,19 @@ button:hover {
 .Buttons {
   display: flex;
   align-items: center;
+}
+
+.Footer-Container {
+  display: flex;
+  width: 100%;
+  height: auto;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.view-items {
+  width: 100%;
+  height: auto;
 }
