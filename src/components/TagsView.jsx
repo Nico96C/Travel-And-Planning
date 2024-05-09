@@ -35,7 +35,15 @@ export default function TagsView() {
         ) : (
           items.map((item) => (
             <div key={item.id} className="item">
-              <p>{item.text}</p>
+              {/* id
+                  nombreDestino 
+                  direccion
+                  fecha
+                  precio
+                  mensaje
+              */}
+              <p>{item.nombreDestino}</p>
+              <p>{item.direccion}</p>
               <button onClick={() => removeItem(item.id)}>Eliminar</button>
             </div>
           ))

@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import GoogleLogin from "react-google-login";
 import { Link } from "react-router-dom";
 import { useHome } from "../context/HomeContext";
 
@@ -22,11 +21,6 @@ export default function NavBar() {
           </Link>
         )}
         <button>FAQ</button>
-        <GoogleLogin
-          buttonText="Iniciar sesión con Google"
-          className="google-login-button"
-          cookiePolicy={"single_host_origin"}
-        ></GoogleLogin>
       </div>
     </div>
   );
