@@ -4,11 +4,10 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 import PlusIcon from "../svg/plus";
 import AdaptativeBanner from "/img/banner5.png";
-import { useItems } from "../context/ItemsContext";
 import { Link } from "react-router-dom";
+import ViewItems from "./ViewItems";
 
 export default function TagsView() {
-  const { removeItem, items } = useItems();
 
   return (
     <div className="Main-Container">
@@ -29,26 +28,7 @@ export default function TagsView() {
         webs y más. Puede comenzar más abajo ⬇
       </p>
 
-      <div className="view-items">
-        {items.length === 0 ? (
-          <p>No hay items disponibles.</p>
-        ) : (
-          items.map((item) => (
-            <div key={item.id} className="item">
-              {/* id
-                  nombreDestino 
-                  direccion
-                  fecha
-                  precio
-                  mensaje
-              */}
-              <p>{item.nombreDestino}</p>
-              <p>{item.direccion}</p>
-              <button onClick={() => removeItem(item.id)}>Eliminar</button>
-            </div>
-          ))
-        )}
-      </div>
+      <ViewItems />
 
       <Link to="/itemCompose" className="add-item">
         <div className="order-item">

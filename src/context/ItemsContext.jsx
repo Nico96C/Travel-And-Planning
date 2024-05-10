@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from "react";
 
 const ItemsContext = createContext();
 
@@ -8,17 +8,14 @@ export const useItems = () => {
 };
 
 export const ItemsProvider = ({ children }) => {
-  const [items, setItems] = useState([]);
+  // Obtén el estado inicial de los elementos del almacenamiento local
+  const itemsFromLocalStorage = JSON.parse(localStorage.getItem("items")) || [];
+  const [items, setItems] = useState(itemsFromLocalStorage);
 
+  // Guarda el estado de los elementos en el almacenamiento local cuando cambie
   useEffect(() => {
-    const storedItems = JSON.parse(localStorage.getItem('items'));
-    if (storedItems) {
-      setItems(storedItems);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('items', JSON.stringify(items));
+    localStorage.setItem("items", JSON.stringify(items));
+    console.log(items)
   }, [items]);
 
   const addItem = (newItem) => {

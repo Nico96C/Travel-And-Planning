@@ -17,14 +17,17 @@ export default function ItemCompose() {
     fecha: "",
     precio: "",
     mensaje: "",
+    enlace: "",
+    img: null,
   });
 
   useEffect(() => {
     setIsHome(false);
-  }, []);
 
-  useEffect(() => {
-    setIsHome(false);
+    const storedLastId = localStorage.getItem('lastId');
+    if (storedLastId) {
+      setLastId(parseInt(storedLastId));
+    }
   }, []);
 
   const handleInputChange = (e) => {
@@ -33,6 +36,21 @@ export default function ItemCompose() {
       ...formData,
       [name]: value,
     });
+  };
+
+  const handleImageChange = (e) => {
+    const imageFile = e.target.files[0]; // Obtener el archivo de imagen
+    
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const base64String = event.target.result; // Obtener la cadena base64
+      setFormData({
+        ...formData,
+        img: base64String, // Guardar la cadena base64 en el estado
+      });
+    };
+    
+    reader.readAsDataURL(imageFile); // Leer el contenido del archivo como una URL de datos
   };
 
   const handleAddItem = () => {
@@ -44,7 +62,13 @@ export default function ItemCompose() {
       fecha: formData.fecha,
       precio: formData.precio,
       mensaje: formData.mensaje,
+      enlace: formData.enlace,
+      img: formData.img,
     };
+
+    const newId = lastId + 1;
+    setLastId(newId);
+    localStorage.setItem('lastId', newId.toString());
 
     // Agregar el objeto a items
     addItem(newItem);
@@ -59,6 +83,8 @@ export default function ItemCompose() {
       fecha: "",
       precio: "",
       mensaje: "",
+      enlace: "",
+      img: "",
     });
   };
 
@@ -110,12 +136,26 @@ export default function ItemCompose() {
                   name="precio"
                   placeholder="Precio"
                 />
+                <h3>Enlace 🔗</h3>
+                <input
+                  type="text"
+                  value={formData.enlace}
+                  onChange={handleInputChange}
+                  name="enlace"
+                  placeholder="URL del sitio"
+                />
               </div>
             </div>
             <div>
               <img className="img-map" src={MapaImg} alt="Imagen de mapa" />
             </div>
           </div>
+
+          <div className="Image-Area">
+            <h3>Imagen 🖼️</h3>
+            <input type="file" accept="image/*" onChange={handleImageChange} />
+          </div>
+
           <div className="Text-Area">
             <textarea
               id="mensaje"

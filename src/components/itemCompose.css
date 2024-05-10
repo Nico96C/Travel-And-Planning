@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap");
+
 .Create-Item-Container {
   width: 100%;
   height: auto;
@@ -24,21 +26,34 @@
 }
 
 .Text-Area textarea {
-    font-size: 16px;
-    background-color: var(--color-secondary);
-    color: var(--color-main);
+  font-size: 16px;
+  background-color: var(--color-secondary);
+  color: var(--color-main);
+  outline: none;
+}
+
+.Image-Area {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.Image-Area input {
+  outline: none;
 }
 
 .Items-1 input {
-    background-color: var(--color-secondary);
-    color: var(--color-main);
+  background-color: var(--color-secondary);
+  color: var(--color-main);
+  outline: none;
 }
 
 .Items-2 input {
-    background-color: var(--color-secondary);
-    color: var(--color-main);
+  background-color: var(--color-secondary);
+  color: var(--color-main);
+  outline: none;
 }
 
 input::placeholder {
-    color: #ffffff;
+  color: #ffffff;
 }
