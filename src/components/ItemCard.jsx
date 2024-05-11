@@ -3,38 +3,59 @@ import { useState } from "react";
 import { useItems } from "../context/ItemsContext";
 import DropDownIcon from "../svg/dropdown";
 import "./TagsView.css";
+import LinkIcon from "../svg/link";
 
 const ItemCard = ({ item }) => {
-    const [expanded, setExpanded] = useState(false);
-    const { removeItem } = useItems();
-  
-    const toggleExpand = () => {
-      setExpanded(!expanded);
-    };
-  
-    return (
-      <div className={`item ${expanded ? 'expanded' : ''}`}>
+  const [expanded, setExpanded] = useState(false);
+  const { removeItem } = useItems();
+
+  const toggleExpand = () => {
+    setExpanded(!expanded);
+  };
+
+  return (
+    <div className={`item ${expanded ? "expanded" : ""}`}>
+      <div className="items-order">
         <div className="first-items">
-          {item.img && <img src={item.img} alt="Imagen Destino" width={"110px"} height={"65px"} />}
-          <h4>{item.nombreDestino}</h4>
-          <h4>{item.fecha}</h4>
+          {item.img && <img src={item.img} alt="Imagen Destino" />}
         </div>
-        <div className="second-items">
-          <button onClick={() => removeItem(item.id)}>Eliminar</button>
-          <h4 onClick={toggleExpand}>
-            Ampliar <DropDownIcon />
-          </h4>
-        </div>
-        {expanded && (
-          <div className="expanded-info">
-            {/* Aquí muestra más información del item */}
-            <p>Dirección: {item.direccion}</p>
-            <p>Precio: {item.precio}</p>
-            {/* Otros detalles */}
+        <h4>{item.nombreDestino}</h4>
+        <h4>{item.fecha}</h4>
+        {!expanded && (
+          <div className="second-items">
+            <button onClick={() => removeItem(item.id)}>Eliminar</button>
+            <h4 onClick={toggleExpand}>
+              Ampliar <DropDownIcon />
+            </h4>
           </div>
         )}
+        {expanded && (
+          <>
+            <div className="expanded-text">
+              <h4>{item.direccion}</h4>
+              <h4>{item.precio}</h4>
+              <a href={'https://' + item.enlace} target="_blank" alt="Enlace para actividad">
+                <LinkIcon />
+              </a>
+            </div>
+          </>
+        )}
       </div>
-    );
-  };
-  
-  export default ItemCard;
+
+      <div className="area-text">
+        <p>{item.mensaje}</p>
+      </div>
+
+      {expanded && (
+        <div className="second-items-2">
+          <button onClick={() => removeItem(item.id)}>Eliminar</button>
+          <h4 className="Contract" onClick={toggleExpand}>
+            Contraer <DropDownIcon />
+          </h4>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default ItemCard;
