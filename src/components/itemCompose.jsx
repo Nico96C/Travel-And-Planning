@@ -39,22 +39,22 @@ export default function ItemCompose() {
   };
 
   const handleImageChange = (e) => {
-    const imageFile = e.target.files[0]; // Obtener el archivo de imagen
+    const imageFile = e.target.files[0]; // Obtener el archivo de imagen //
     
     const reader = new FileReader();
     reader.onload = (event) => {
-      const base64String = event.target.result; // Obtener la cadena base64
+      const base64String = event.target.result; // Obtener base64 //
       setFormData({
         ...formData,
-        img: base64String, // Guardar la cadena base64 en el estado
+        img: base64String, // Guardar base64 en el estado //
       });
     };
     
-    reader.readAsDataURL(imageFile); // Leer el contenido del archivo como una URL de datos
+    reader.readAsDataURL(imageFile); // Leer el contenido del archivo como una URL //
   };
 
   const handleAddItem = () => {
-    // Crear un objeto con los datos del formulario
+    // Crear un objeto con los datos del formulario //
     const newItem = {
       id: lastId + 1,
       nombreDestino: formData.nombreDestino,
@@ -70,13 +70,13 @@ export default function ItemCompose() {
     setLastId(newId);
     localStorage.setItem('lastId', newId.toString());
 
-    // Agregar el objeto a items
+    // Agregar el objeto a items //
     addItem(newItem);
 
-    // Incrementar el último ID utilizado
+    // Incrementar el último ID utilizado //
     setLastId(lastId + 1);
 
-    // Limpiar el formulario
+    // Limpiar el formulario //
     setFormData({
       nombreDestino: "",
       direccion: "",

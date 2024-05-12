@@ -13,7 +13,7 @@ export default function ViewItems() {
  precio
  mensaje
  enlace
- url
+ img
    */
   }
 

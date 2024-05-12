@@ -121,4 +121,5 @@ button:hover {
 .view-items {
   width: 100%;
   height: auto;
+  user-select: none;
 }
