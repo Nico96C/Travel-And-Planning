@@ -4,7 +4,6 @@ import ItemCard from "./ItemCard";
 export default function ViewItems() {
   const { items } = useItems();
 
-
   {
     /*   id
  nombreDestino 
@@ -22,9 +21,7 @@ export default function ViewItems() {
       {items.length === 0 ? (
         <p>No hay items disponibles.</p>
       ) : (
-        items.map((item) => (
-            <ItemCard key={item.id} item={item}/>
-        ))
+        items.map((item, index) => <ItemCard key={item.id} item={item} index={index}/>)
       )}
     </div>
   );

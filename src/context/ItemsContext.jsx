@@ -15,19 +15,14 @@ export const ItemsProvider = ({ children }) => {
   // Guarda el estado de los elementos en el almacenamiento local cuando cambie
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(items));
-    console.log(items)
   }, [items]);
 
   const addItem = (newItem) => {
     setItems([...items, newItem]);
   };
 
-  const toggleItem = (id) => {
-    setItems(
-      items.map((item) =>
-        item.id === id ? { ...item, completed: !item.completed } : item
-      )
-    );
+  const updateItems = (newArray) => {
+    setItems([...newArray]);
   };
 
   const removeItem = (id) => {
@@ -35,7 +30,7 @@ export const ItemsProvider = ({ children }) => {
   };
 
   return (
-    <ItemsContext.Provider value={{ items, addItem, toggleItem, removeItem }}>
+    <ItemsContext.Provider value={{ items, addItem, updateItems, removeItem }}>
       {children}
     </ItemsContext.Provider>
   );

@@ -6,16 +6,81 @@ import "./TagsView.css";
 import LinkIcon from "../svg/link";
 import TrashIcon from "../svg/trash";
 
-const ItemCard = ({ item }) => {
+const ItemCard = ({ item, index }) => {
   const [expanded, setExpanded] = useState(false);
-  const { removeItem } = useItems();
+  const { removeItem, items, updateItems } = useItems();
+  const [dragItem, setDragItem] = useState(null);
+  const [draggedOverItem, setDraggedOverItem] = useState(null);
 
   const toggleExpand = () => {
     setExpanded(!expanded);
   };
 
+  function handleDragOver(index, event) {
+    event.preventDefault();
+    const rect = event.target.getBoundingClientRect();
+    const offset = rect.height / 2;
+    const currentY = event.clientY - rect.top;
+
+    let newIndex;
+
+    const topBoundary = offset - 40;
+    const bottomBoundary = offset + 40;
+
+    if (currentY > bottomBoundary) {
+      newIndex = index + 1; // Mover hacia abajo
+    } else if (currentY < topBoundary) {
+      newIndex = index - 1; // Mover hacia arriba
+    } else {
+      // Si la posición del ratón está dentro del rango, no hay cambio
+      newIndex = index;
+    }
+
+    if (newIndex !== -1) {
+      setDraggedOverItem(newIndex);
+    }
+  }
+
+  function handleDragStart() {
+    if (!expanded) {
+      setDragItem(index);
+    }
+  }
+
+  function handleDragEnter() {
+    if (!expanded) {
+      setDraggedOverItem(index);
+    }
+  }
+
+  function handleSort() {
+    if (!expanded) {
+      if (dragItem === null || draggedOverItem === null) {
+        // No hay suficiente información para ordenar
+        return;
+      }
+
+      const itemClone = [...items];
+      const temp = itemClone[dragItem];
+      itemClone[dragItem] = itemClone[draggedOverItem];
+      itemClone[draggedOverItem] = temp;
+      updateItems(itemClone);
+    }
+  }
+
   return (
-    <div className={`item ${expanded ? "expanded" : ""}`}>
+    <div
+      draggable
+      onDragStart={() => {
+        handleDragStart(index);
+      }}
+      onDragEnter={() => {
+        handleDragEnter(index);
+      }}
+      onDragEnd={handleSort}
+      onDragOver={(e) => handleDragOver(index, e)}
+      className={`item ${expanded ? "expanded" : ""}`}
+    >
       <div className="items-order">
         <div className="first-items">
           {item.img && <img src={item.img} alt="Imagen Destino" />}
