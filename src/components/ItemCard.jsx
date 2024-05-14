@@ -36,7 +36,9 @@ const ItemCard = ({ item, index }) => {
       newIndex = index;
     }
 
-    if (newIndex !== -1) {
+    const itemsLength = items.length;
+    console.log(newIndex, itemsLength)
+    if (newIndex !== -1 && newIndex !== itemsLength) {
       setDraggedOverItem(newIndex);
     }
   }

@@ -24,7 +24,7 @@ export default function ItemCompose() {
   useEffect(() => {
     setIsHome(false);
 
-    const storedLastId = localStorage.getItem('lastId');
+    const storedLastId = localStorage.getItem("lastId");
     if (storedLastId) {
       setLastId(parseInt(storedLastId));
     }
@@ -39,17 +39,17 @@ export default function ItemCompose() {
   };
 
   const handleImageChange = (e) => {
-    const imageFile = e.target.files[0]; // Obtener el archivo de imagen //
-    
+    const imageFile = e.target.files[0]; // Obtiene el archivo de imagen //
+
     const reader = new FileReader();
     reader.onload = (event) => {
-      const base64String = event.target.result; // Obtener base64 //
+      const base64String = event.target.result; // Obtiene base64 //
       setFormData({
         ...formData,
-        img: base64String, // Guardar base64 en el estado //
+        img: base64String, // Guarda base64 en el estado //
       });
     };
-    
+
     reader.readAsDataURL(imageFile); // Leer el contenido del archivo como una URL //
   };
 
@@ -68,7 +68,7 @@ export default function ItemCompose() {
 
     const newId = lastId + 1;
     setLastId(newId);
-    localStorage.setItem('lastId', newId.toString());
+    localStorage.setItem("lastId", newId.toString());
 
     // Agregar el objeto a items //
     addItem(newItem);
@@ -85,6 +85,7 @@ export default function ItemCompose() {
       mensaje: "",
       enlace: "",
       img: "",
+      imgURL: "",
     });
   };
 
@@ -110,13 +111,13 @@ export default function ItemCompose() {
                   name="nombreDestino"
                   placeholder="Ingrese destino"
                 />
-                <h3>Direccion 🗺</h3>
+                <h3>Zona 🗺</h3>
                 <input
                   type="text"
                   value={formData.direccion}
                   onChange={handleInputChange}
                   name="direccion"
-                  placeholder="Calle y número"
+                  placeholder="Zona/Barrio/Localidad"
                 />
               </div>
               <div className="Items-2">
@@ -147,7 +148,11 @@ export default function ItemCompose() {
               </div>
             </div>
             <div>
-              <img className="img-map" src={MapaImg} alt="Imagen de mapa" />
+              <img
+                className="img-map"
+                src={formData.img || MapaImg}
+                alt="Imagen de mapa"
+              />
             </div>
           </div>
 

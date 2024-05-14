@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import { useHome } from "./context/HomeContext";
 import { useEffect } from "react";
+import IntroGif from "/img/Presentacion.gif";
 
 function App() {
 
@@ -30,7 +31,7 @@ function App() {
           </Link>
         </div>
         <div className="Body-Container">
-          <h2>¡VIDEO ILUSTRATIVO DE COMO SE VE!</h2>
+          <img src={IntroGif} alt="Descripción del GIF"/>
         </div>
         <div className="Banner-Container">
           <img
