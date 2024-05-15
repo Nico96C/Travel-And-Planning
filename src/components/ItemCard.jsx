@@ -103,7 +103,7 @@ const ItemCard = ({ item, index }) => {
           <>
             <div className="expanded-text">
               <h4>{item.direccion}</h4>
-              <h4>{item.precio}</h4>
+              <h4>{item.precio === "0" ? "Gratis" : "$ " + item.precio}</h4>
               <a
                 href={"https://" + item.enlace}
                 target="_blank"

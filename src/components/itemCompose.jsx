@@ -20,6 +20,23 @@ export default function ItemCompose() {
     enlace: "",
     img: null,
   });
+  const [query, setQuery] = useState("");
+  const [images, setImages] = useState([]);
+
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+  };
+
+  const handleSearch = async () => {
+    const apiKey = "AIzaSyBeiRI9Mqgzo_WwySzkX9nbM7PD7A-SSKw"; // Reemplaza con tu clave de API
+    const searchEngineId = "e55f0e82f80b44372"; // Reemplaza con tu ID de motor de búsqueda
+
+    const response = await fetch(
+      `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${searchEngineId}&searchType=image&q=${query}&num=3`
+    );
+    const data = await response.json();
+    setImages(data.items);
+  };
 
   useEffect(() => {
     setIsHome(false);
@@ -100,17 +117,36 @@ export default function ItemCompose() {
         </div>
 
         <div className="Area">
+          <div className="Item-Head">
+            <h3>Actividad 📌</h3>
+            <input
+              type="text"
+              value={formData.nombreDestino}
+              onChange={(e) => {
+                handleInputChange(e);
+                handleChange(e);
+              }}
+              name="nombreDestino"
+              placeholder="Ingrese destino"
+            />
+            <button onClick={handleSearch}>View Images</button>
+          </div>
+          <div className="Img-Container">
+            {images
+              .filter((image) => image.link)
+              .map((image, index) => (
+                <img
+                  className="img-select"
+                  key={index}
+                  src={image.link}
+                  alt={image.title || "Imagen sin título"}
+                />
+              ))}
+          </div>
+
           <div className="Create-Item-Container">
             <div>
               <div className="Items-1">
-                <h3>Actividad 📌</h3>
-                <input
-                  type="text"
-                  value={formData.nombreDestino}
-                  onChange={handleInputChange}
-                  name="nombreDestino"
-                  placeholder="Ingrese destino"
-                />
                 <h3>Zona 🗺</h3>
                 <input
                   type="text"

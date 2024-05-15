@@ -31,7 +31,8 @@ function App() {
           </Link>
         </div>
         <div className="Body-Container">
-          <img src={IntroGif} alt="Descripción del GIF"/>
+          {/* <img src={IntroGif} alt="Descripción del GIF"/> */}
+          <h2>UN VIDEO EXPLICATIVO</h2>
         </div>
         <div className="Banner-Container">
           <img

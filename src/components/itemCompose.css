@@ -57,3 +57,25 @@
 input::placeholder {
   color: #ffffff;
 }
+
+.Img-Container {
+  display: flex;
+  margin-top: 20px;
+}
+
+.img-select {
+  width: 250px;
+  height: 180px;
+  object-fit: contain;
+}
+
+.Item-Head {
+  display: flex;
+  align-items: center;
+}
+
+.Item-Head input {
+  background-color: var(--color-secondary);
+  color: var(--color-main);
+  outline: none;
+}
