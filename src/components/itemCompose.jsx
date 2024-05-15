@@ -6,6 +6,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useItems } from "../context/ItemsContext";
 import MapaImg from "/img/mapa.jpg";
+import apiKeys from '../private/apiKeys';
+
+const apiKey = apiKeys.apiKey;
+const searchEngineId = apiKeys.searchEngineId;
 
 export default function ItemCompose() {
   const { setIsHome } = useHome();
@@ -28,11 +32,11 @@ export default function ItemCompose() {
   };
 
   const handleSearch = async () => {
-    const apiKey = "AIzaSyBeiRI9Mqgzo_WwySzkX9nbM7PD7A-SSKw"; // Reemplaza con tu clave de API
-    const searchEngineId = "e55f0e82f80b44372"; // Reemplaza con tu ID de motor de búsqueda
+    const apiKeyItem = apiKey; // Reemplaza con tu clave de API
+    const searchEngineIdItem = searchEngineId; // Reemplaza con tu ID de motor de búsqueda
 
     const response = await fetch(
-      `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${searchEngineId}&searchType=image&q=${query}&num=3`
+      `https://www.googleapis.com/customsearch/v1?key=${apiKeyItem}&cx=${searchEngineIdItem}&searchType=image&q=${query}&num=3`
     );
     const data = await response.json();
     setImages(data.items);
