@@ -122,6 +122,10 @@
   cursor: pointer;
 }
 
+.delete-button:hover svg{
+  animation: moveRight 2s ease infinite;
+}
+
 .expanded-info {
   margin-top: 10px;
   padding: 10px;
@@ -162,4 +166,22 @@
 
 .area-text p {
   margin: 0;
+}
+
+@keyframes moveRight {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(0) rotate(10deg);
+  }
+  50% {
+    transform: translateX(0px) rotate(0deg);
+  }
+  75% {
+    transform: translateX(0px) rotate(-10deg);
+  }
+  100% {
+    transform: translateX(0px) rotate(0deg);
+  }
 }

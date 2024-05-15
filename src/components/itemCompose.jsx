@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useItems } from "../context/ItemsContext";
 import MapaImg from "/img/mapa.jpg";
-import apiKeys from '../private/apiKeys';
+import apiKeys from "../private/apiKeys";
 
 const apiKey = apiKeys.apiKey;
 const searchEngineId = apiKeys.searchEngineId;
@@ -32,8 +32,8 @@ export default function ItemCompose() {
   };
 
   const handleSearch = async () => {
-    const apiKeyItem = apiKey; // Reemplaza con tu clave de API
-    const searchEngineIdItem = searchEngineId; // Reemplaza con tu ID de motor de búsqueda
+    const apiKeyItem = apiKey; // clave de API //
+    const searchEngineIdItem = searchEngineId; // ID de motor de búsqueda //
 
     const response = await fetch(
       `https://www.googleapis.com/customsearch/v1?key=${apiKeyItem}&cx=${searchEngineIdItem}&searchType=image&q=${query}&num=3`
@@ -57,6 +57,14 @@ export default function ItemCompose() {
       ...formData,
       [name]: value,
     });
+  };
+
+  const handleClick = (image) => {
+    // Actualiza el estado formData con la URL de la imagen seleccionada //
+    setFormData((prevData) => ({
+      ...prevData,
+      img: image.link
+    }));
   };
 
   const handleImageChange = (e) => {
@@ -122,19 +130,32 @@ export default function ItemCompose() {
 
         <div className="Area">
           <div className="Item-Head">
-            <h3>Actividad 📌</h3>
-            <input
-              type="text"
-              value={formData.nombreDestino}
-              onChange={(e) => {
-                handleInputChange(e);
-                handleChange(e);
-              }}
-              name="nombreDestino"
-              placeholder="Ingrese destino"
-            />
-            <button onClick={handleSearch}>View Images</button>
+            <div>
+              <h3>Actividad 📌</h3>
+              <input
+                className="text-input"
+                type="text"
+                value={formData.nombreDestino}
+                onChange={(e) => {
+                  handleInputChange(e);
+                  handleChange(e);
+                }}
+                name="nombreDestino"
+                placeholder="Ingrese destino"
+              />
+              <button onClick={handleSearch}>Ver Imagenes</button>
+            </div>
+
+            <div className="Image-Area">
+              <h3>Imagen 🖼️</h3>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+            </div>
           </div>
+
           <div className="Img-Container">
             {images
               .filter((image) => image.link)
@@ -143,6 +164,7 @@ export default function ItemCompose() {
                   className="img-select"
                   key={index}
                   src={image.link}
+                  onClick={() => handleClick(image)}
                   alt={image.title || "Imagen sin título"}
                 />
               ))}
@@ -194,11 +216,6 @@ export default function ItemCompose() {
                 alt="Imagen de mapa"
               />
             </div>
-          </div>
-
-          <div className="Image-Area">
-            <h3>Imagen 🖼️</h3>
-            <input type="file" accept="image/*" onChange={handleImageChange} />
           </div>
 
           <div className="Text-Area">

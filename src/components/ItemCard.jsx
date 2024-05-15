@@ -91,7 +91,7 @@ const ItemCard = ({ item, index }) => {
         <h4>{item.fecha}</h4>
         {!expanded && (
           <div className="second-items">
-            <button onClick={() => removeItem(item.id)}>
+            <button className="delete-button" onClick={() => removeItem(item.id)}>
               <TrashIcon />
             </button>
             <h4 onClick={toggleExpand}>
@@ -122,7 +122,7 @@ const ItemCard = ({ item, index }) => {
 
       {expanded && (
         <div className="second-items-2">
-          <button onClick={() => removeItem(item.id)}>
+          <button className="delete-button" onClick={() => removeItem(item.id)}>
             <TrashIcon />
           </button>
           <h4 className="Contract" onClick={toggleExpand}>

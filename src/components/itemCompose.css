@@ -34,7 +34,7 @@
 
 .Image-Area {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
 }
 
@@ -72,9 +72,14 @@ input::placeholder {
 .Item-Head {
   display: flex;
   align-items: center;
+  gap: 2rem;
 }
 
-.Item-Head input {
+.Image-Area h3 {
+  margin-bottom: 20px;
+}
+
+.Item-Head .text-input {
   background-color: var(--color-secondary);
   color: var(--color-main);
   outline: none;
