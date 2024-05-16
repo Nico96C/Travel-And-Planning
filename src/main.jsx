@@ -7,6 +7,7 @@ import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ItemsProvider } from "./context/ItemsContext.jsx";
 import { HomeProvider } from "./context/HomeContext.jsx";
+import ItemInfo from "./components/itemInfo.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="/" element={<App />} />
             <Route path="/tagsview" element={<TagsView />} />
             <Route path="/itemCompose" element={<ItemCompose />} />
+            <Route path="/tagsview/:id" element={<ItemInfo />} />
           </Routes>
         </BrowserRouter>
       </HomeProvider>

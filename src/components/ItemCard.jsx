@@ -5,6 +5,8 @@ import DropDownIcon from "../svg/dropdown";
 import "./TagsView.css";
 import LinkIcon from "../svg/link";
 import TrashIcon from "../svg/trash";
+import Plus2Icon from "../svg/plus-2";
+import { Link } from "react-router-dom";
 
 const ItemCard = ({ item, index }) => {
   const [expanded, setExpanded] = useState(false);
@@ -37,7 +39,6 @@ const ItemCard = ({ item, index }) => {
     }
 
     const itemsLength = items.length;
-    console.log(newIndex, itemsLength)
     if (newIndex !== -1 && newIndex !== itemsLength) {
       setDraggedOverItem(newIndex);
     }
@@ -91,9 +92,18 @@ const ItemCard = ({ item, index }) => {
         <h4>{item.fecha}</h4>
         {!expanded && (
           <div className="second-items">
-            <button className="delete-button" onClick={() => removeItem(item.id)}>
+            <button
+              className="delete-button"
+              onClick={() => removeItem(item.id)}
+              title="Eliminar"
+            >
               <TrashIcon />
             </button>
+            <Link to={`/tagsview/${item.id}`}>
+              <button className="more-button" title="Ver más">
+                <Plus2Icon />
+              </button>
+            </Link>
             <h4 onClick={toggleExpand}>
               Ampliar <DropDownIcon />
             </h4>
@@ -122,9 +132,18 @@ const ItemCard = ({ item, index }) => {
 
       {expanded && (
         <div className="second-items-2">
-          <button className="delete-button" onClick={() => removeItem(item.id)}>
+          <button
+            className="delete-button"
+            title="Eliminar"
+            onClick={() => removeItem(item.id)}
+          >
             <TrashIcon />
           </button>
+          <Link to={`/tagsview/${item.id}`} className="no-underline">
+            <button className="more-button">
+              <Plus2Icon /> <h5>Ver más</h5>
+            </button>
+          </Link>
           <h4 className="Contract" onClick={toggleExpand}>
             Contraer <DropDownIcon />
           </h4>
