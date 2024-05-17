@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useHome } from "../context/HomeContext";
+import BackIcon from "../svg/back";
 
 export default function NavBar() {
   const { isHome, setIsHome } = useHome();
@@ -17,7 +18,9 @@ export default function NavBar() {
       <div className="Buttons">
         {isHome && (
           <Link to="/">
-            <button>GO BACK</button>
+            <button>
+              <BackIcon />
+            </button>
           </Link>
         )}
         <button>FAQ</button>
