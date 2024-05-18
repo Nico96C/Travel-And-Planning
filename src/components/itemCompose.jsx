@@ -173,13 +173,13 @@ export default function ItemCompose() {
           <div className="Create-Item-Container">
             <div>
               <div className="Items-1">
-                <h3>Zona 🗺</h3>
+                <h3>Ubicación 🗺</h3>
                 <input
                   type="text"
                   value={formData.direccion}
                   onChange={handleInputChange}
                   name="direccion"
-                  placeholder="Zona/Barrio/Localidad"
+                  placeholder="Ubicación"
                 />
               </div>
               <div className="Items-2">

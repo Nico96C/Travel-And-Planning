@@ -8,3 +8,25 @@
   justify-content: center;
   border: 1px solid var(--color-secondary);
 }
+
+.Header-Item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.Container-Text-Area textarea {
+  font-size: 16px;
+  background-color: var(--color-main);
+  color: var(--color-secondary);
+  outline: none;
+  border: 2px solid var(--color-secondary);
+  padding: 5px;
+}
+
+.Container-Text-Area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+}

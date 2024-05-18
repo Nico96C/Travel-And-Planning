@@ -4,11 +4,13 @@ import InteractiveMap from "./InteractiveMap";
 import "./itemInfo.css";
 import NavBar from "./NavBar";
 import { useHome } from "../context/HomeContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import BackIcon from "../svg/back";
+import Footer from "./Footer";
 
 export default function ItemInfo() {
   const { items, updateItems } = useItems();
+  const [isEditable, setIsEditable] = useState(false);
   const { id } = useParams();
 
   const { setIsHome } = useHome();
@@ -16,6 +18,10 @@ export default function ItemInfo() {
   useEffect(() => {
     setIsHome(false);
   }, []);
+
+  const handleEditClick = () => {
+    setIsEditable(!isEditable);
+  };
 
   const item = items.find((item) => item.id === parseInt(id));
 
@@ -43,12 +49,31 @@ export default function ItemInfo() {
           <BackIcon />
         </button>
       </Link>
-      <div>
-        La actividad es {item.nombreDestino}
+      <div className="Header-Item">
+        <div>
+          La actividad que usted selecciono es {item.nombreDestino}, de Buenos
+          Aires que se encuentra por {item.direccion}. Que posee una visita con
+          un valor {item.precio === "0" ? "gratuito" : `$${item.precio}`}
+        </div>
+        <div>
+          <img src={item.img} alt="Imagen del destino" />
+        </div>
       </div>
+      <div className="Container-Text-Area">
+            <textarea
+                value={item.mensaje}
+                readOnly={!isEditable}
+                rows="6"
+                cols="70"
+            />
+            <button onClick={handleEditClick}>
+                {isEditable ? "Guardar" : "Editar"}
+            </button>
+        </div>
       <div className="map-container">
-        <InteractiveMap item={item}/>
+        <InteractiveMap item={item} />
       </div>
+      <Footer />
     </div>
   );
 }
