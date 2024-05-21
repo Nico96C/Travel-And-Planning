@@ -13,9 +13,12 @@ const searchEngineId = apiKeys.searchEngineId;
 
 export default function ItemCompose() {
   const { setIsHome } = useHome();
-  const { addItem } = useItems();
+  const { addItem, formData, setFormData } = useItems();
   const [lastId, setLastId] = useState(0);
-  const [formData, setFormData] = useState({
+  const [query, setQuery] = useState("");
+  const [images, setImages] = useState([]);
+
+  const initialFormData = {
     nombreDestino: "",
     direccion: "",
     fecha: "",
@@ -23,9 +26,12 @@ export default function ItemCompose() {
     mensaje: "",
     enlace: "",
     img: null,
-  });
-  const [query, setQuery] = useState("");
-  const [images, setImages] = useState([]);
+  };
+
+  useEffect(() => {
+    // Reset formData to initial state when component mounts
+    setFormData(initialFormData);
+  }, [setFormData]);
 
   const handleChange = (e) => {
     setQuery(e.target.value);

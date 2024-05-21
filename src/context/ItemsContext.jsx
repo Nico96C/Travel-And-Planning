@@ -8,11 +8,18 @@ export const useItems = () => {
 };
 
 export const ItemsProvider = ({ children }) => {
-  // Obtén el estado inicial de los elementos del almacenamiento local
   const itemsFromLocalStorage = JSON.parse(localStorage.getItem("items")) || [];
   const [items, setItems] = useState(itemsFromLocalStorage);
+  const [formData, setFormData] = useState({
+    nombreDestino: "",
+    direccion: "",
+    fecha: "",
+    precio: "",
+    mensaje: "",
+    enlace: "",
+    img: null,
+  });
 
-  // Guarda el estado de los elementos en el almacenamiento local cuando cambie
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(items));
   }, [items]);
@@ -21,8 +28,8 @@ export const ItemsProvider = ({ children }) => {
     setItems([...items, newItem]);
   };
 
-  const updateItems = (newArray) => {
-    setItems([...newArray]);
+  const updateItem = (id, updatedItem) => {
+    setItems(items.map(item => item.id === id ? updatedItem : item));
   };
 
   const removeItem = (id) => {
@@ -30,7 +37,7 @@ export const ItemsProvider = ({ children }) => {
   };
 
   return (
-    <ItemsContext.Provider value={{ items, addItem, updateItems, removeItem }}>
+    <ItemsContext.Provider value={{ items, addItem, updateItem, removeItem, formData, setFormData }}>
       {children}
     </ItemsContext.Provider>
   );

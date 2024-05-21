@@ -14,18 +14,25 @@ const apiKeyItem = apiKeys.apiKey;
 const searchEngineIdItem = apiKeys.searchEngineId;
 
 export default function ItemInfo() {
-  const { items, updateItems } = useItems();
+  const { items, updateItem, formData, setFormData } = useItems();
   const [isEditable, setIsEditable] = useState(false);
+  const [editableMensaje, setEditableMensaje] = useState("");
   const { id } = useParams();
   const { setIsHome } = useHome();
   const [searchResults, setSearchResults] = useState([]);
   const [wikiInfo, setWikiInfo] = useState("");
   const [error, setError] = useState(null);
 
+  const item = items.find((item) => item.id === parseInt(id));
+
   useEffect(() => {
     setIsHome(false);
 
     if (item) {
+      // Set formData to the current item's data
+      setFormData(item);
+      setEditableMensaje(item.mensaje);
+
       const query = `${item.nombreDestino}, Buenos Aires`;
 
       const fetchWikiInfo = async () => {
@@ -85,28 +92,23 @@ export default function ItemInfo() {
 
       fetchSearchResults();
     }
-  }, [setIsHome]);
+  }, [setIsHome, item, setFormData]);
 
   const handleEditClick = () => {
+    if (isEditable) {
+      // Update the specific item with editableMensaje
+      updateItem(item.id, { ...item, mensaje: editableMensaje });
+    }
     setIsEditable(!isEditable);
   };
 
-  const item = items.find((item) => item.id === parseInt(id));
+  const handleChange = (e) => {
+    const { value } = e.target;
+    setEditableMensaje(value);
+  };
 
   if (!item) {
     return <div>Ítem no encontrado</div>;
-  }
-
-  {
-    /*   id
- nombreDestino 
- direccion
- fecha
- precio
- mensaje
- enlace
- img
-   */
   }
 
   return (
@@ -123,17 +125,20 @@ export default function ItemInfo() {
           <strong> {item.nombreDestino}, de Buenos Aires </strong> que se
           encuentra por <strong>{item.direccion}.</strong> Que posee una visita
           con un valor {item.precio === "0" ? "gratuito" : `$${item.precio}`}.
-          <div className="Container-Text-Area">
-            <textarea
-              value={item.mensaje}
-              readOnly={!isEditable}
-              rows="10"
-              cols="30"
-            />
+          <div className="Container-mensaje">
+            <div className="Container-Text-Area">
+              <textarea
+                value={editableMensaje}
+                readOnly={!isEditable}
+                onChange={handleChange}
+                rows="10"
+                cols="30"
+              />
+            </div>
+            <button onClick={handleEditClick}>
+              {isEditable ? "Guardar" : "Editar"}
+            </button>
           </div>
-          <button onClick={handleEditClick}>
-            {isEditable ? "Guardar" : "Editar"}
-          </button>
         </div>
         <div>
           <img
