@@ -32,12 +32,16 @@ export const ItemsProvider = ({ children }) => {
     setItems(items.map(item => item.id === id ? updatedItem : item));
   };
 
+  const replaceItem = (updatedItems) => {
+    setItems(updatedItems);
+  };
+
   const removeItem = (id) => {
     setItems(items.filter((item) => item.id !== id));
   };
 
   return (
-    <ItemsContext.Provider value={{ items, addItem, updateItem, removeItem, formData, setFormData }}>
+    <ItemsContext.Provider value={{ items, addItem, updateItem, removeItem, formData, setFormData, replaceItem }}>
       {children}
     </ItemsContext.Provider>
   );

@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const ItemCard = ({ item, index }) => {
   const [expanded, setExpanded] = useState(false);
-  const { removeItem, items, updateItems } = useItems();
+  const { removeItem, items, replaceItem } = useItems();
   const [dragItem, setDragItem] = useState(null);
   const [draggedOverItem, setDraggedOverItem] = useState(null);
 
@@ -39,7 +39,7 @@ const ItemCard = ({ item, index }) => {
     }
 
     const itemsLength = items.length;
-    if (newIndex !== -1 && newIndex !== itemsLength) {
+    if (newIndex >= 0 && newIndex < itemsLength) {
       setDraggedOverItem(newIndex);
     }
   }
@@ -64,92 +64,94 @@ const ItemCard = ({ item, index }) => {
       }
 
       const itemClone = [...items];
-      const temp = itemClone[dragItem];
-      itemClone[dragItem] = itemClone[draggedOverItem];
-      itemClone[draggedOverItem] = temp;
-      updateItems(itemClone);
+      const temp = itemClone[draggedOverItem];
+      itemClone[draggedOverItem] = itemClone[dragItem];
+      itemClone[dragItem] = temp;
+      replaceItem(itemClone);
+      setDragItem(null);
+      setDraggedOverItem(null);
     }
   }
 
   return (
-    <div
-      draggable
-      onDragStart={() => {
-        handleDragStart(index);
-      }}
-      onDragEnter={() => {
-        handleDragEnter(index);
-      }}
-      onDragEnd={handleSort}
-      onDragOver={(e) => handleDragOver(index, e)}
-      className={`item ${expanded ? "expanded" : ""}`}
-    >
-      <div className="items-order">
-        <div className="first-items">
-          {item.img && <img src={item.img} alt="Imagen Destino" />}
+      <div
+        draggable
+        onDragStart={() => {
+          handleDragStart(index);
+        }}
+        onDragEnter={() => {
+          handleDragEnter(index);
+        }}
+        onDragEnd={handleSort}
+        onDragOver={(e) => handleDragOver(index, e)}
+        className={`item ${expanded ? "expanded" : ""}`}
+      >
+        <div className="items-order">
+          <div className="first-items">
+            {item.img && <img src={item.img} alt="Imagen Destino" />}
+          </div>
+          <h4>{item.nombreDestino}</h4>
+          <h4>{item.fecha}</h4>
+          {!expanded && (
+            <div className="second-items">
+              <button
+                className="delete-button"
+                onClick={() => removeItem(item.id)}
+                title="Eliminar"
+              >
+                <TrashIcon />
+              </button>
+              <Link to={`/tagsview/${item.id}`}>
+                <button className="more-button" title="Ver más">
+                  <Plus2Icon />
+                </button>
+              </Link>
+              <h4 onClick={toggleExpand}>
+                Ampliar <DropDownIcon />
+              </h4>
+            </div>
+          )}
+          {expanded && (
+            <>
+              <div className="expanded-text">
+                <h4>{item.direccion}</h4>
+                <h4>{item.precio === "0" ? "Gratis" : "$ " + item.precio}</h4>
+                <a
+                  href={"https://" + item.enlace}
+                  target="_blank"
+                  alt="Enlace para actividad"
+                >
+                  <LinkIcon />
+                </a>
+              </div>
+            </>
+          )}
         </div>
-        <h4>{item.nombreDestino}</h4>
-        <h4>{item.fecha}</h4>
-        {!expanded && (
-          <div className="second-items">
+
+        <div className="area-text">
+          <p>{item.mensaje}</p>
+        </div>
+
+        {expanded && (
+          <div className="second-items-2">
             <button
               className="delete-button"
-              onClick={() => removeItem(item.id)}
               title="Eliminar"
+              onClick={() => removeItem(item.id)}
             >
               <TrashIcon />
             </button>
-            <Link to={`/tagsview/${item.id}`}>
-              <button className="more-button" title="Ver más">
-                <Plus2Icon />
+            <Link to={`/tagsview/${item.id}`} className="no-underline">
+              <button className="more-button">
+                <Plus2Icon /> <h5>Ver más</h5>
               </button>
             </Link>
-            <h4 onClick={toggleExpand}>
-              Ampliar <DropDownIcon />
+            <h4 className="Contract" onClick={toggleExpand}>
+              Contraer <DropDownIcon />
             </h4>
           </div>
         )}
-        {expanded && (
-          <>
-            <div className="expanded-text">
-              <h4>{item.direccion}</h4>
-              <h4>{item.precio === "0" ? "Gratis" : "$ " + item.precio}</h4>
-              <a
-                href={"https://" + item.enlace}
-                target="_blank"
-                alt="Enlace para actividad"
-              >
-                <LinkIcon />
-              </a>
-            </div>
-          </>
-        )}
       </div>
-
-      <div className="area-text">
-        <p>{item.mensaje}</p>
-      </div>
-
-      {expanded && (
-        <div className="second-items-2">
-          <button
-            className="delete-button"
-            title="Eliminar"
-            onClick={() => removeItem(item.id)}
-          >
-            <TrashIcon />
-          </button>
-          <Link to={`/tagsview/${item.id}`} className="no-underline">
-            <button className="more-button">
-              <Plus2Icon /> <h5>Ver más</h5>
-            </button>
-          </Link>
-          <h4 className="Contract" onClick={toggleExpand}>
-            Contraer <DropDownIcon />
-          </h4>
-        </div>
-      )}
-    </div>
   );
 };
 

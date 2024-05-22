@@ -8,19 +8,22 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ItemsProvider } from "./context/ItemsContext.jsx";
 import { HomeProvider } from "./context/HomeContext.jsx";
 import ItemInfo from "./components/itemInfo.jsx";
+import { LoadingProvider } from "./context/LoadingContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ItemsProvider>
       <HomeProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<App />} />
-            <Route path="/tagsview" element={<TagsView />} />
-            <Route path="/itemCompose" element={<ItemCompose />} />
-            <Route path="/tagsview/:id" element={<ItemInfo />} />
-          </Routes>
-        </BrowserRouter>
+        <LoadingProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<App />} />
+              <Route path="/tagsview" element={<TagsView />} />
+              <Route path="/itemCompose" element={<ItemCompose />} />
+              <Route path="/tagsview/:id" element={<ItemInfo />} />
+            </Routes>
+          </BrowserRouter>
+        </LoadingProvider>
       </HomeProvider>
     </ItemsProvider>
   </React.StrictMode>

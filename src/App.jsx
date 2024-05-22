@@ -7,14 +7,20 @@ import Footer from "./components/Footer";
 import { useHome } from "./context/HomeContext";
 import { useEffect } from "react";
 import IntroGif from "/img/Presentacion.gif";
+import { useLoading } from "./context/LoadingContext";
 
 function App() {
 
   const { setIsHome } = useHome();
+  const { setLoading } = useLoading(); // setLoading del contexto //
 
   useEffect(() => {
     setIsHome(false);
   }, []);
+
+  const handleStartClick = () => {
+    setLoading(true);
+  };
 
   return (
     <>
@@ -26,7 +32,7 @@ function App() {
             src={BannerApp}
             alt="Viaje y plan banner"
           />
-          <Link to="/tagsview">
+          <Link to="/tagsview" onClick={handleStartClick}>
             <button className="Banner-Button">Empezar</button>
           </Link>
         </div>

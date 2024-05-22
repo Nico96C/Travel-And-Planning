@@ -14,7 +14,7 @@ const apiKeyItem = apiKeys.apiKey;
 const searchEngineIdItem = apiKeys.searchEngineId;
 
 export default function ItemInfo() {
-  const { items, updateItem, formData, setFormData } = useItems();
+  const { items, updateItem, setFormData } = useItems();
   const [isEditable, setIsEditable] = useState(false);
   const [editableMensaje, setEditableMensaje] = useState("");
   const { id } = useParams();
@@ -155,7 +155,7 @@ export default function ItemInfo() {
         ) : (
           <div>
             <h3>Información de Wikipedia:</h3>
-            <p>{wikiInfo || "Cargando información..."}</p>
+            {wikiInfo ? <p>{wikiInfo}</p> : <div className="circle-loader" />}
           </div>
         )}
       </div>
