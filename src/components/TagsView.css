@@ -61,7 +61,7 @@
 }
 
 .item .first-items img {
-  width: 110px;
+  width: 175px;
   height: 65px;
   border: 3px solid var(--color-secondary);
   border-radius: 5px;
@@ -69,10 +69,9 @@
 }
 
 .item.expanded {
-  height: 500px;
+  height: 420px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .item.expanded .first-items img {
@@ -103,12 +102,71 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
 }
 
 .second-items {
   display: flex;
   align-items: center;
   gap: 20px;
+}
+
+.items-primary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.items-primary h2 {
+  font-weight: 700;
+}
+
+.items-primary h4 {
+  font-weight: 700;
+}
+
+.expanded-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.expanded-items h4 {
+  font-weight: 700;
+}
+
+.item.expanded .items-primary {
+  gap: 30px;
+}
+
+.info-container.expanded {
+  text-align: center;
+  margin: 0;
+}
+
+.info-text {
+  border: 2px solid var(--color-secondary);
+  padding: 5px 10px;
+  display: inline-block;
+  width: 98%;
+  text-align: center;
+}
+
+.expanded-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 30px;
+}
+
+.expanded-container .info-text {
+  margin-bottom: 15px;
+}
+
+.expanded-subcontainer {
+  display: flex;
+  justify-content: space-around;
 }
 
 .second-items-2 {
@@ -130,7 +188,7 @@
   cursor: pointer;
 }
 
-.delete-button:hover svg{
+.delete-button:hover svg {
   animation: moveRight 2s ease infinite;
 }
 
@@ -168,8 +226,8 @@
   width: 100%;
   padding: 15px;
   border: 1px solid var(--color-secondary);
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 30px;
+  margin-bottom: 45px;
 }
 
 .area-text p {

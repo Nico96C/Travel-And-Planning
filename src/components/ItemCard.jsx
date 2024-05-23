@@ -74,84 +74,125 @@ const ItemCard = ({ item, index }) => {
   }
 
   return (
-      <div
-        draggable
-        onDragStart={() => {
-          handleDragStart(index);
-        }}
-        onDragEnter={() => {
-          handleDragEnter(index);
-        }}
-        onDragEnd={handleSort}
-        onDragOver={(e) => handleDragOver(index, e)}
-        className={`item ${expanded ? "expanded" : ""}`}
-      >
-        <div className="items-order">
-          <div className="first-items">
-            {item.img && <img src={item.img} alt="Imagen Destino" />}
-          </div>
-          <h4>{item.nombreDestino}</h4>
-          <h4>{item.fecha}</h4>
-          {!expanded && (
-            <div className="second-items">
-              <button
-                className="delete-button"
-                onClick={() => removeItem(item.id)}
-                title="Eliminar"
-              >
-                <TrashIcon />
-              </button>
-              <Link to={`/tagsview/${item.id}`}>
-                <button className="more-button" title="Ver más">
-                  <Plus2Icon />
-                </button>
-              </Link>
-              <h4 onClick={toggleExpand}>
-                Ampliar <DropDownIcon />
-              </h4>
-            </div>
-          )}
-          {expanded && (
-            <>
-              <div className="expanded-text">
-                <h4>{item.direccion}</h4>
-                <h4>{item.precio === "0" ? "Gratis" : "$ " + item.precio}</h4>
-                <a
-                  href={"https://" + item.enlace}
-                  target="_blank"
-                  alt="Enlace para actividad"
-                >
-                  <LinkIcon />
-                </a>
-              </div>
-            </>
-          )}
+    <div
+      draggable
+      onDragStart={() => {
+        handleDragStart(index);
+      }}
+      onDragEnter={() => {
+        handleDragEnter(index);
+      }}
+      onDragEnd={handleSort}
+      onDragOver={(e) => handleDragOver(index, e)}
+      className={`item ${expanded ? "expanded" : ""}`}
+    >
+      <div className="items-order">
+        <div className="first-items">
+          {item.img && <img src={item.img} alt="Imagen Destino" />}
+          {!expanded && <h3 className="info-text">INFORMACION</h3>}
         </div>
 
-        <div className="area-text">
-          <p>{item.mensaje}</p>
-        </div>
+        {!expanded && (<div className="items-primary">
+          <h2>{item.nombreDestino}</h2>
+          <h4>{item.fecha}</h4>
+        </div>)}
+
+        {!expanded && (
+                <div className="second-items">
+                  <button
+                    className="delete-button"
+                    onClick={() => removeItem(item.id)}
+                    title="Eliminar"
+                  >
+                    <TrashIcon />
+                  </button>
+                  <Link to={`/tagsview/${item.id}`}>
+                    <button className="more-button" title="Ver más">
+                      <Plus2Icon />
+                    </button>
+                  </Link>
+                  <h4 onClick={toggleExpand}>
+                    Ampliar <DropDownIcon />
+                  </h4>
+                </div>
+              )}
 
         {expanded && (
-          <div className="second-items-2">
-            <button
-              className="delete-button"
-              title="Eliminar"
-              onClick={() => removeItem(item.id)}
-            >
-              <TrashIcon />
-            </button>
-            <Link to={`/tagsview/${item.id}`} className="no-underline">
-              <button className="more-button">
-                <Plus2Icon /> <h5>Ver más</h5>
-              </button>
-            </Link>
-            <h4 className="Contract" onClick={toggleExpand}>
-              Contraer <DropDownIcon />
-            </h4>
+          <div className="expanded-container">
+            <h3 className="info-text">INFORMACION</h3>
+
+            <div className="expanded-subcontainer">
+              <div className="items-primary">
+                <h2>{item.nombreDestino}</h2>
+                <h4>{item.fecha}</h4>
+              </div>
+
+              {!expanded && (
+                <div className="second-items">
+                  <button
+                    className="delete-button"
+                    onClick={() => removeItem(item.id)}
+                    title="Eliminar"
+                  >
+                    <TrashIcon />
+                  </button>
+                  <Link to={`/tagsview/${item.id}`}>
+                    <button className="more-button" title="Ver más">
+                      <Plus2Icon />
+                    </button>
+                  </Link>
+                  <h4 onClick={toggleExpand}>
+                    Ampliar <DropDownIcon />
+                  </h4>
+                </div>
+              )}
+
+              {expanded && (
+                <div className="expanded-text">
+                  <div className="expanded-items">
+                    <h2>{item.direccion}</h2>
+                    <h4>
+                      {item.precio === "0" ? "Gratis" : "$ " + item.precio}
+                    </h4>
+                  </div>
+                  <a
+                    href={"https://" + item.enlace}
+                    target="_blank"
+                    alt="Enlace para actividad"
+                  >
+                    <LinkIcon />
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
         )}
       </div>
+
+      <div className="area-text">
+        <p>{item.mensaje}</p>
+      </div>
+
+      {expanded && (
+        <div className="second-items-2">
+          <button
+            className="delete-button"
+            title="Eliminar"
+            onClick={() => removeItem(item.id)}
+          >
+            <TrashIcon />
+          </button>
+          <Link to={`/tagsview/${item.id}`} className="no-underline">
+            <button className="more-button">
+              <Plus2Icon /> <h5>Ver más</h5>
+            </button>
+          </Link>
+          <h4 className="Contract" onClick={toggleExpand}>
+            Contraer <DropDownIcon />
+          </h4>
+        </div>
+      )}
+    </div>
   );
 };
 
