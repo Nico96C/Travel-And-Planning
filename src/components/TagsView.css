@@ -61,8 +61,8 @@
 }
 
 .item .first-items img {
-  width: 175px;
-  height: 65px;
+  width: 120px;
+  height: 70px;
   border: 3px solid var(--color-secondary);
   border-radius: 5px;
   transition: all 0.7s ease;
@@ -148,9 +148,14 @@
 .info-text {
   border: 2px solid var(--color-secondary);
   padding: 5px 10px;
-  display: inline-block;
+  display: flex;
   width: 98%;
   text-align: center;
+  cursor: pointer;
+  z-index: 99;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 
 .expanded-container {
@@ -243,6 +248,57 @@
 
 .no-underline {
   text-decoration: none;
+}
+
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.modal-1 {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-content-1 {
+  background-color: var(--color-main);
+  margin: 15% auto;
+  padding: 15px;
+  border: 1px solid var(--color-secondary);
+  width: 25%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 @keyframes moveRight {
