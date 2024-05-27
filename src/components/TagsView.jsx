@@ -42,7 +42,7 @@ export default function TagsView() {
             ideales que quiere visitar, agregue cuanto desee, haga su plan y
             organice cada uno, según la fecha deseada. Sienta la libertad de
             poder elegir y modificar según su gusto tanto con imágenes,
-            agregando sitios webs y más. Puede comenzar más abajo ⬇
+            agregando sitios webs y más. Puede comenzar más abajo.
           </p>
 
           <ViewItems />

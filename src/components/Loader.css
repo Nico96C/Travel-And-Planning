@@ -19,7 +19,7 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 20%;
+  height: 80%;
   background: rgba(31, 200, 212, 0.6);
   z-index: 0;
   animation: wave 3s infinite ease-in-out;
@@ -27,7 +27,7 @@
 
 .loader::after {
   background: rgba(235, 211, 211, 0.3);
-  animation: wave 8s infinite ease-in-out reverse;
+  animation: wave 7s infinite ease-in-out reverse;
 }
 
 .fade-in-1,

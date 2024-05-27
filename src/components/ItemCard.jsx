@@ -8,6 +8,13 @@ import TrashIcon from "../svg/trash";
 import Plus2Icon from "../svg/plus-2";
 import { Link } from "react-router-dom";
 import InfoIcon from "../svg/info";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+} from "@mui/material";
 
 const ItemCard = ({ item, index }) => {
   const [expanded, setExpanded] = useState(false);
@@ -15,6 +22,7 @@ const ItemCard = ({ item, index }) => {
   const [dragItem, setDragItem] = useState(null);
   const [draggedOverItem, setDraggedOverItem] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
   const toggleExpand = () => {
     setExpanded(!expanded);
@@ -79,6 +87,17 @@ const ItemCard = ({ item, index }) => {
     setModalOpen(!modalOpen);
   };
 
+  const handleClick = (e) => {
+    if (!item.enlace) {
+      e.preventDefault();
+      setShowAlert(true);
+    }
+  };
+
+  const handleClose = () => {
+    setShowAlert(false);
+  };
+
   return (
     <>
       {modalOpen && !expanded && (
@@ -87,7 +106,33 @@ const ItemCard = ({ item, index }) => {
             <span className="close" onClick={handleModal}>
               &times;
             </span>
-            <p>Aquí va tu mensaje o contenido de la modal.</p>
+            <h3 className="title-item">El formato y su información:</h3>
+            <div className="explain-item">
+              Estos datos son los que se pueden en contrar en cada card creada ⬇
+            </div>
+            <div className="List-item">
+              <ul>
+                <li>
+                  Nombre del Destino. <strong>{`${item.nombreDestino}`}</strong>
+                </li>
+                <li>
+                  Ubicación. <strong>{`${item.direccion}`}</strong>
+                </li>
+                <li>
+                  Fecha. <strong>{`${item.fecha}`}</strong>
+                </li>
+                <li>
+                  Precio.{" "}
+                  <strong>{`${
+                    item.precio === "0" ? "Gratis" : "$ " + item.precio
+                  }`}</strong>
+                </li>
+                <li>
+                  Recordatorio o Anotación. <br />{" "}
+                  <strong>{`${item.mensaje}`}</strong>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       )}
@@ -122,7 +167,20 @@ const ItemCard = ({ item, index }) => {
                 <span className="close" onClick={handleModal}>
                   &times;
                 </span>
-                <p>Aquí va tu mensaje o contenido de la modal.</p>
+                <h3 className="title-item">El formato y su información:</h3>
+                <div className="explain-item">
+                  Estos datos son los que se pueden en contrar en cada card
+                  creada ⬇
+                </div>
+                <div className="List-item">
+                  <ul>
+                    <li>Nombre del Destino.</li>
+                    <li>Ubicación.</li>
+                    <li>Fecha.</li>
+                    <li>Precio.</li>
+                    <li>Recordatorio o Anotación.</li>
+                  </ul>
+                </div>
               </div>
             </div>
           )}
@@ -196,13 +254,26 @@ const ItemCard = ({ item, index }) => {
                         {item.precio === "0" ? "Gratis" : "$ " + item.precio}
                       </h4>
                     </div>
-                    <a
-                      href={"https://" + item.enlace}
-                      target="_blank"
-                      alt="Enlace para actividad"
-                    >
-                      <LinkIcon />
-                    </a>
+                    <div className="alert-Link">
+                      <a
+                        href={item.enlace ? `https://${item.enlace}` : "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        alt="Enlace para actividad"
+                        onClick={handleClick}
+                      >
+                        <LinkIcon />
+                      </a>
+                      <Dialog open={showAlert} onClose={handleClose}>
+                        <DialogTitle>Aviso</DialogTitle>
+                        <DialogContent>No hay enlace disponible</DialogContent>
+                        <DialogActions>
+                          <Button onClick={handleClose} color="primary">
+                            Cerrar
+                          </Button>
+                        </DialogActions>
+                      </Dialog>
+                    </div>
                   </div>
                 )}
               </div>

@@ -3,7 +3,7 @@ import "../App.css";
 import "./itemCompose.css";
 import { useHome } from "../context/HomeContext";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 import { useItems } from "../context/ItemsContext";
 import MapaImg from "/img/mapa.jpg";
 import apiKeys from "../private/apiKeys";
@@ -104,6 +104,7 @@ export default function ItemCompose() {
     const newId = lastId + 1;
     setLastId(newId);
     localStorage.setItem("lastId", newId.toString());
+    const navigate = useNavigate;
 
     // Agregar el objeto a items //
     addItem(newItem);
@@ -122,6 +123,8 @@ export default function ItemCompose() {
       img: "",
       imgURL: "",
     });
+
+    navigate('/tagsview');
   };
 
   return (
